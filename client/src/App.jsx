@@ -1,18 +1,11 @@
 import "./App.css";
+import Header from "./components/Header";
 import Post from "./components/Post";
 
 function App() {
   return (
     <main>
-      <header>
-        <a href="" className="logo">
-          Voyager Blog
-        </a>
-        <nav>
-          <a href="">Login</a>
-          <a href="">Register</a>
-        </nav>
-      </header>
+      <Header />
       <Post />
       <Post />
       <Post />
