@@ -13,7 +13,7 @@ export default function Post() {
           <a href="" className="author">
             Fernando Martínez
           </a>
-          <time datetime="">2024-01-01</time>
+          <time>2024-01-01</time>
         </p>
         <p className="summary">
           If you're on the hunt for the best informative car blogs for all the
