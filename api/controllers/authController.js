@@ -50,7 +50,10 @@ exports.login = async (req, res) => {
             .status(500)
             .json({ message: "Error generating token", error: err.message });
         }
-        res.cookie("token", token).json("ok");
+        res.cookie("token", token).json({
+          id: userDoc._id,
+          username,
+        });
       }
     );
   } catch (error) {

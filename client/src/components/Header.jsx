@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 export default function Header() {
-  const [username, setUsername] = useState(null);
+  const { setUserInfo, userInfo } = useContext(UserContext);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/profile`, {
       credentials: "include",
     }).then((res) => {
       res.json().then((userInfo) => {
-        setUsername(userInfo.username);
+        setUserInfo(userInfo);
       });
     });
   }, []);
@@ -19,8 +20,10 @@ export default function Header() {
       credentials: "include",
       method: "POST",
     });
-    setUsername(null);
+    setUserInfo(null);
   }
+
+  const username = userInfo?.username;
 
   return (
     <header>
