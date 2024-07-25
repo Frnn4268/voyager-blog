@@ -12,6 +12,7 @@ const postRoutes = require("./routes/postRoute"); // Import post routes
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 // Call the connectDB function to establish MongoDB connection
 connectDB();

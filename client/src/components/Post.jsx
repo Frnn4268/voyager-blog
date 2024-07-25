@@ -1,25 +1,27 @@
-export default function Post() {
+import formatISO9075 from "date-fns/formatISO9075";
+
+export default function Post({
+  title,
+  summary,
+  cover,
+  content,
+  createdAt,
+  author,
+}) {
   return (
     <div className="post">
       <div className="image">
-        <img
-          src="https://cdn.shopify.com/s/files/1/1310/3673/files/Best-Car-Blogs-feat.jpg?v=1659583858"
-          alt=""
-        />
+        <img src={`${process.env.REACT_APP_API_UPLOAD}` + cover} alt="" />
       </div>
       <div className="texts">
-        <h2>55 Best Car Blogs for Auto Enthusiasts</h2>
+        <h2>{title}</h2>
         <p className="info">
           <a href="" className="author">
-            Fernando Martínez
+            {author.username}
           </a>
-          <time>2024-01-01</time>
+          <time>{formatISO9075(createdAt)}</time>
         </p>
-        <p className="summary">
-          If you're on the hunt for the best informative car blogs for all the
-          latest updates in the automotive world, then you're in the right
-          place. Here you'll find the top 55 auto blogs online.
-        </p>
+        <p className="summary">{summary}</p>
       </div>
     </div>
   );

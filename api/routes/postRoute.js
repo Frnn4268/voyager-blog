@@ -6,6 +6,11 @@ const postController = require("../controllers/postController");
 
 const uploadMiddleware = multer({ dest: "uploads/" });
 
-router.post("/post", uploadMiddleware.single('file'), postController.createPost);
+router.get("/post", postController.getPost);
+router.post(
+  "/post",
+  uploadMiddleware.single("file"),
+  postController.createPost
+);
 
 module.exports = router;
