@@ -67,3 +67,7 @@ exports.profile = async (req, res) => {
     res.json(info);
   });
 };
+
+exports.logout = async (req, res) => {
+  res.cookie("token", "").json("ok");
+};
