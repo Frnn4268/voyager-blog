@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+// Register controller
 exports.register = async (req, res) => {
   const { username, password } = req.body;
 
@@ -24,6 +25,7 @@ exports.register = async (req, res) => {
   }
 };
 
+// Login controller
 exports.login = async (req, res) => {
   const { username, password } = req.body;
 
@@ -56,4 +58,12 @@ exports.login = async (req, res) => {
       .status(500)
       .json({ message: "Internal server error", error: error.message });
   }
+};
+
+exports.profile = async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, process.env.JWT_SECRET, {}, (err, info) => {
+    if (err) throw err;
+    res.json(info);
+  });
 };

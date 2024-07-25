@@ -1,12 +1,15 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 const connectDB = require("./config/mongoDB"); // MongoDB connection
+
 const userRoutes = require("./routes/authRoute"); // Import user routes
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 // Call the connectDB function to establish MongoDB connection
 connectDB();
