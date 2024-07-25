@@ -37,15 +37,15 @@ export default function CreatePostPage() {
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
 
-  function createNewPost(ev) {
+  async function createNewPost(ev) {
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    data.set("files", files[0]);
+    data.set("file", files[0]);
 
     ev.preventDefault();
-    fetch(`${process.env.REACT_APP_API_URL}/post`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/post`, {
       method: "POST",
       body: data,
     });
