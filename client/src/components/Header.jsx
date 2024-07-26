@@ -1,6 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
@@ -42,24 +47,25 @@ export default function Header() {
   const username = userInfo?.username;
 
   return (
-    <header>
-      <Link to="/" className="logo">
-        Voyager Blog
-      </Link>
-      <nav>
-        {username && (
-          <>
-            <Link to="/create">Create new Post</Link>
-            <a onClick={logout}>Logout</a>
-          </>
-        )}
-        {!username && (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </>
-        )}
-      </nav>
-    </header>
+    <AppBar position="static" style={{ width: '100%', marginTop: 0, borderRadius: 5 }} sx={{ backgroundColor: '#333', padding: '0.5rem 1rem' }}>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Typography variant="h6" component={RouterLink} to="/" style={{ textDecoration: 'none', fontWeight: 'bold', marginRight: 500 }}>
+          Voyager Blog
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 2 }}>
+          {username ? (
+            <>
+              <Button color="inherit" component={RouterLink} to="/create" sx={{ textTransform: 'none', width: 100, fontWeight: 'bold' }}>Create Post</Button>
+              <Button color="inherit" onClick={logout} sx={{ textTransform: 'none', width: 100, fontWeight: 'bold' }}>Logout</Button>
+            </>
+          ) : (
+            <>
+              <Button color="inherit" component={RouterLink} to="/login" sx={{ textTransform: 'none', width: 100, fontWeight: 'bold' }}>Login</Button>
+              <Button color="inherit" component={RouterLink} to="/register" sx={{ textTransform: 'none', width: 100, fontWeight: 'bold' }}>Register</Button>
+            </>
+          )}
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
