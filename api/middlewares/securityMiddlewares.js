@@ -9,16 +9,9 @@ const xss = require("xss-clean");
 
 const securityMiddlewares = (app) => {
   // Security middlewares
-  app.use(cors({ 
-    origin: "http://localhost:3000", // Frontend Origin
-    credentials: true 
-  }));
-  app.use(cookieParser());
+  app.use(cors({ origin: true, credentials: true }));
   app.use(express.json());
-  app.use("/uploads", express.static(__dirname + "/uploads"));
-
-  // Use Helmet to set various HTTP headers for security
-  // app.use(helmet());
+  app.use(cookieParser());
 
   // Rate limiting middleware
   const limiter = rateLimit({
