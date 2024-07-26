@@ -1,4 +1,3 @@
-// middlewares.js
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -10,25 +9,16 @@ const xss = require("xss-clean");
 
 const securityMiddlewares = (app) => {
   // Security middlewares
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "trusted-cdn.com"],
-        objectSrc: ["'none'"],
-        upgradeInsecureRequests: [],
-      },
-    },
-    expectCt: {
-      enforce: true,
-      maxAge: 30,
-    },
-    referrerPolicy: { policy: "no-referrer" },
+  app.use(cors({ 
+    origin: "http://localhost:3000", // Frontend Origin
+    credentials: true 
   }));
-  app.use(cors({ origin: true, credentials: true }));
   app.use(cookieParser());
   app.use(express.json());
   app.use("/uploads", express.static(__dirname + "/uploads"));
+
+  // Use Helmet to set various HTTP headers for security
+  // app.use(helmet());
 
   // Rate limiting middleware
   const limiter = rateLimit({
