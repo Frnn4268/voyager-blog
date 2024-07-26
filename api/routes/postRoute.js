@@ -13,5 +13,10 @@ router.post(
   uploadMiddleware.single("file"),
   postController.createPost
 );
+router.put(
+  "/post",
+  uploadMiddleware.single("file"),
+  postController.updatePost
+);
 
 module.exports = router;
