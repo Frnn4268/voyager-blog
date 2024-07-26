@@ -1,7 +1,9 @@
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+
 const Post = require("../models/Post");
+const User = require('../models/User');
 
 dotenv.config();
 
@@ -117,4 +119,46 @@ exports.updatePost = async (req, res) => {
       res.status(500).json({ error: "Failed to update post" });
     }
   });
+};
+
+// Ruta para obtener los usuarios con más posts
+exports.getTopUsers = async (req, res) => {
+  try {
+    const topUsers = await Post.aggregate([
+      {
+        $group: {
+          _id: "$author",
+          postCount: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { postCount: -1 }
+      },
+      {
+        $limit: 10
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id",
+          foreignField: "_id",
+          as: "user"
+        }
+      },
+      {
+        $unwind: "$user"
+      },
+      {
+        $project: {
+          _id: 0,
+          username: "$user.username",
+          postCount: 1
+        }
+      }
+    ]);
+
+    res.json(topUsers);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch top users' });
+  }
 };

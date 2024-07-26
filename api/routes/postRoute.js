@@ -8,6 +8,7 @@ const uploadMiddleware = multer({ dest: "uploads/" });
 
 router.get("/post", postController.getPost);
 router.get("/post/:id", postController.getPostById);
+router.get("/top-users", postController.getTopUsers);
 router.post(
   "/post",
   uploadMiddleware.single("file"),
