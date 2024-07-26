@@ -8,19 +8,35 @@ export default function Header() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/profile`, {
       credentials: "include",
-    }).then((res) => {
-      res.json().then((userInfo) => {
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then((userInfo) => {
         setUserInfo(userInfo);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch profile:', error);
       });
-    });
-  }, []);
+  }, [setUserInfo]);
 
   function logout() {
     fetch(`${process.env.REACT_APP_API_URL}/logout`, {
       credentials: "include",
       method: "POST",
-    });
-    setUserInfo(null);
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        setUserInfo(null);
+      })
+      .catch((error) => {
+        console.error('Failed to logout:', error);
+      });
   }
 
   const username = userInfo?.username;
