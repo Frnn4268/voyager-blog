@@ -14,6 +14,12 @@ exports.getPost = async (req, res) => {
   );
 };
 
+exports.getPostById = async (req, res) => {
+  const { id } = req.params;
+  const postDoc = await Post.findById(id).populate("author", ["username"]);
+  res.json(postDoc);
+};
+
 exports.createPost = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "File is required" });
