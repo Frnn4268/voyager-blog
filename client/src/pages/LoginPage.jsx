@@ -1,6 +1,10 @@
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -37,21 +41,32 @@ export default function LoginPage() {
   }
 
   return (
-    <form className="login" onSubmit={login}>
-      <h1>Login</h1>
-      <input
-        type="text"
-        placeholder="Username"
+    <Box component="form" onSubmit={login} sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: 'auto', mt: 5 }}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Login
+      </Typography>
+      <TextField
+        label="Username"
+        variant="outlined"
         value={username}
         onChange={(ev) => setUsername(ev.target.value)}
+        fullWidth
       />
-      <input
+      <TextField
+        label="Password"
         type="password"
-        placeholder="Password"
+        variant="outlined"
         value={password}
         onChange={(ev) => setPassword(ev.target.value)}
+        fullWidth
       />
-      <button>Login</button>
-    </form>
+      <Button
+        variant="contained"
+        type="submit"
+        style={{ textTransform: 'none', fontWeight: 'bold', backgroundColor: 'gray' }}
+      >
+        Login
+      </Button>
+    </Box>
   );
 }
