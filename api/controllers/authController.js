@@ -82,5 +82,9 @@ exports.profile = async (req, res) => {
 
 // Logout controller
 exports.logout = async (req, res) => {
-  res.cookie("token", "", { httpOnly: true }).json("ok");
+  try {
+    res.cookie("token", "", { httpOnly: true }).json("ok");
+  } catch (error) {
+    res.status(500).json({ message: "Error logging out", error: error.message });
+  }
 };

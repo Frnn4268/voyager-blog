@@ -1,18 +1,13 @@
 const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
+const connectDB = require("./config/mongoDB"); // MongoDB connection
+const userRoutes = require("./routes/authRoute"); // Import user routes
+const postRoutes = require("./routes/postRoute"); // Import post routes
+const securityMiddlewares = require("./middlewares/securityMiddlewares"); // Import security middlewares
 
 const app = express();
 
-const connectDB = require("./config/mongoDB"); // MongoDB connection
-
-const userRoutes = require("./routes/authRoute"); // Import user routes
-const postRoutes = require("./routes/postRoute"); // Import post routes
-
-app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
-app.use(cookieParser());
-app.use("/uploads", express.static(__dirname + "/uploads"));
+// Apply security middlewares
+securityMiddlewares(app);
 
 // Call the connectDB function to establish MongoDB connection
 connectDB();
