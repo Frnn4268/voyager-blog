@@ -1,4 +1,5 @@
 import ReactQuill from "react-quill";
+import Paper from '@mui/material/Paper';
 
 const modules = {
   toolbar: [
@@ -17,11 +18,13 @@ const modules = {
 
 export default function Editor({ value, onChange }) {
   return (
-    <ReactQuill
-      value={value}
-      onChange={onChange}
-      modules={modules}
-      theme={"snow"}
-    />
+    <Paper elevation={3} style={{ padding: '16px' }}>
+      <ReactQuill
+        value={value}
+        onChange={onChange}
+        modules={modules}
+        theme={"snow"}
+      />
+    </Paper>
   );
 }
