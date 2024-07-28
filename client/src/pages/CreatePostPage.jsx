@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Editor from "../components/Editor";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import CreateIcon from '@mui/icons-material/Create';
 
 export default function CreatePostPage() {
   const [title, setTitle] = useState("");
@@ -77,6 +79,7 @@ export default function CreatePostPage() {
           variant="contained"
           component="label"
           style={{ textTransform: 'none', fontWeight: 'bold', backgroundColor: '#6f6f6f', width: 400 }}
+          startIcon={<UploadFileIcon />}
         >
           {fileName || "Upload File"}
           <input
@@ -103,6 +106,7 @@ export default function CreatePostPage() {
               backgroundColor: '#32cd32',
             },
           }}
+          startIcon={<CreateIcon />}
         >
           Create post
         </Button>
