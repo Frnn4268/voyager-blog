@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Typography, List, ListItem, ListItemText, Container, Paper } from "@mui/material";
 
 export default function TopUsersPage() {
   const [topUsers, setTopUsers] = useState([]);
@@ -20,13 +21,22 @@ export default function TopUsersPage() {
   }, []);
 
   return (
-    <>
-      <h1>Top Users!</h1>
-      <ul>
-        {topUsers.map((user, index) => (
-          <li key={index}>{user.username} - {user.postCount} posts</li>
-        ))}
-      </ul>
-    </>
+    <Container>
+      <Typography style={{ fontWeight: 'bold' }} variant="h4" component="h1" gutterBottom>
+        Top Users - Voyager Blog
+      </Typography>
+      <Paper elevation={3}>
+        <List>
+          {topUsers.map((user, index) => (
+            <ListItem key={index}>
+              <ListItemText
+                primary={user.username}
+                secondary={`${user.postCount} posts`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+    </Container>
   );
 }
