@@ -8,6 +8,9 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import EditIcon from '@mui/icons-material/Edit';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
@@ -31,10 +34,12 @@ export default function PostPage() {
           <Typography variant="h4" component="h1" gutterBottom style={{ fontWeight: 'bold', display: 'flex', justifyContent: 'center' }}>
             {postInfo.title}     
           </Typography>
-          <Typography variant="body2" color="textSecondary" style={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography variant="body2" color="textSecondary" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CalendarTodayIcon sx={{ mr: 1 }} />
             {formatISO9075(new Date(postInfo.createdAt))}
           </Typography>
-          <Typography variant="body1" color="textSecondary" gutterBottom style={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography variant="body1" color="textSecondary" gutterBottom style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <PersonIcon sx={{ mr: 1 }} />
             by @{postInfo.author.username}
           </Typography>
           {userInfo.id === postInfo.author._id && (
@@ -51,6 +56,7 @@ export default function PostPage() {
                     background: 'orange'
                   }
                 }}
+                startIcon={<EditIcon />}
               >
                 Edit this post
               </Button>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Typography, List, ListItem, ListItemText, Container, Paper } from "@mui/material";
+import { Typography, List, ListItem, ListItemText, Container, Paper, ListItemIcon } from "@mui/material";
+import PersonIcon from '@mui/icons-material/Person';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 export default function TopUsersPage() {
   const [topUsers, setTopUsers] = useState([]);
@@ -29,9 +31,17 @@ export default function TopUsersPage() {
         <List>
           {topUsers.map((user, index) => (
             <ListItem key={index}>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
               <ListItemText
                 primary={user.username}
-                secondary={`${user.postCount} posts`}
+                secondary={
+                  <>
+                    <PostAddIcon sx={{ mr: 1 }} />
+                    {`${user.postCount} posts`}
+                  </>
+                }
               />
             </ListItem>
           ))}

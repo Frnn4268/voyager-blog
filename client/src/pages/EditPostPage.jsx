@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Editor from "../components/Editor";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import SaveIcon from '@mui/icons-material/Save';
 
 export default function EditPostPage() {
   const { id } = useParams();
@@ -80,6 +82,7 @@ export default function EditPostPage() {
           variant="contained"
           component="label"
           style={{ textTransform: 'none', fontWeight: 'bold', backgroundColor: '#6f6f6f', width: 400 }}
+          startIcon={<UploadFileIcon />}
         >
           {fileName || "Upload File"}
           <input
@@ -95,12 +98,13 @@ export default function EditPostPage() {
         <Button
           variant="contained"
           type="submit"
-          style={{ textTransform: 'none', fontWeight: 'bold', maxWidth: 150, borderRadius: 5, backgroundColor: '#00d410', fontSize: 16 }}
+          style={{ textTransform: 'none', fontWeight: 'bold', maxWidth: 200, borderRadius: 5, backgroundColor: '#00d410', fontSize: 16 }}
           sx={{
             '&:hover': {
               backgroundColor: '#32cd32',
             },
           }}
+          startIcon={<SaveIcon />}
         >
           Update post
         </Button>
