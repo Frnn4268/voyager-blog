@@ -50,7 +50,7 @@ Create a `.env` file in the root directory and add the following environment var
    
 	`PORT=<your_port>`
 
-	`MONGODB_URI=<your_mongo_url`
+	`MONGODB_URI=<your_mongo_url>`
 
 	`JWT_SECRET=<your_secret>`
 
