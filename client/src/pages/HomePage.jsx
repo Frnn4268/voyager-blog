@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
+import { useSnackbar } from 'notistack';
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/post`)
@@ -17,6 +19,7 @@ export default function HomePage() {
       })
       .catch((error) => {
         console.error('Failed to fetch posts:', error);
+        enqueueSnackbar('Failed to fetch posts.', { variant: 'error' });
       });
   }, []);
 

@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Editor from "../components/Editor";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import CreateIcon from '@mui/icons-material/Create';
+import { useSnackbar } from 'notistack';
 
 export default function CreatePostPage() {
   const [title, setTitle] = useState("");
@@ -17,15 +18,16 @@ export default function CreatePostPage() {
   const [fileName, setFileName] = useState("");
   const [filePreview, setFilePreview] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   async function createNewPost(ev) {
+    ev.preventDefault();
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
     data.set("file", files[0]);
 
-    ev.preventDefault();
     const res = await fetch(`${process.env.REACT_APP_API_URL}/post`, {
       method: "POST",
       body: data,
@@ -33,7 +35,10 @@ export default function CreatePostPage() {
     });
 
     if (res.ok) {
+      enqueueSnackbar('Post created successfully!', { variant: 'success' });
       setRedirect(true);
+    } else {
+      enqueueSnackbar('Failed to create post.', { variant: 'error' });
     }
     await res.json();
   }

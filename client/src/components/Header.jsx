@@ -11,9 +11,11 @@ import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { useSnackbar } from 'notistack';
 
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/profile`, {
@@ -27,11 +29,13 @@ export default function Header() {
       })
       .then((userInfo) => {
         setUserInfo(userInfo);
+        enqueueSnackbar('Profile loaded successfully', { variant: 'success' });
       })
       .catch((error) => {
         console.error('Failed to fetch profile:', error);
+        enqueueSnackbar('Failed to fetch profile', { variant: 'error' });
       });
-  }, [setUserInfo]);
+  }, []); // Dependencias vacías para ejecutar solo una vez
 
   function logout() {
     fetch(`${process.env.REACT_APP_API_URL}/logout`, {
@@ -43,9 +47,11 @@ export default function Header() {
           throw new Error('Network response was not ok');
         }
         setUserInfo(null);
+        enqueueSnackbar('Logged out successfully', { variant: 'success' });
       })
       .catch((error) => {
         console.error('Failed to logout:', error);
+        enqueueSnackbar('Failed to logout', { variant: 'error' });
       });
   }
 

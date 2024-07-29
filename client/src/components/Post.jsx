@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import PersonIcon from '@mui/icons-material/Person';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { useSnackbar } from 'notistack';
 
 export default function Post({
   _id,
@@ -17,9 +18,15 @@ export default function Post({
   createdAt,
   author,
 }) {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClick = () => {
+    enqueueSnackbar('Viewing the post!', { variant: 'info' });
+  };
+
   return (
     <Card style={{ marginTop: 25 }} sx={{ maxWidth: '100%', margin: '1rem', boxShadow: 4 }}>
-      <Link to={`/post/${_id}`} style={{ textDecoration: 'none' }}>
+      <Link to={`/post/${_id}`} style={{ textDecoration: 'none' }} onClick={handleClick}>
         <CardMedia
           component="img"
           height="140"
@@ -28,7 +35,7 @@ export default function Post({
         />
       </Link>
       <CardContent>
-        <Link to={`/post/${_id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/post/${_id}`} style={{ textDecoration: 'none' }} onClick={handleClick}>
           <Typography gutterBottom variant="h5" component="div">
             {title}
           </Typography>

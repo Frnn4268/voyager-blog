@@ -7,10 +7,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import { useSnackbar } from 'notistack';
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
 
   async function register(ev) {
     ev.preventDefault();
@@ -21,12 +23,12 @@ export default function RegisterPage() {
         headers: { "Content-Type": "application/json" },
       });
       if (res.status === 200) {
-        alert("Registration successful.");
+        enqueueSnackbar("Registration successful.", { variant: 'success' });
       } else {
-        alert("Registration failed.");
+        enqueueSnackbar("Registration failed.", { variant: 'error' });
       }
     } catch (error) {
-      alert("Registration failed.");
+      enqueueSnackbar("Registration failed.", { variant: 'error' });
     }
   }
 

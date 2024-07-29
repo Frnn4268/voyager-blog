@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Editor from "../components/Editor";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import SaveIcon from '@mui/icons-material/Save';
+import { useSnackbar } from 'notistack';
 
 export default function EditPostPage() {
   const { id } = useParams();
@@ -16,6 +17,7 @@ export default function EditPostPage() {
   const [files, setFiles] = useState("");
   const [fileName, setFileName] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/post/${id}`).then((res) => {
@@ -47,7 +49,10 @@ export default function EditPostPage() {
     });
 
     if (res.ok) {
+      enqueueSnackbar('Post updated successfully!', { variant: 'success' });
       setRedirect(true);
+    } else {
+      enqueueSnackbar('Failed to update post.', { variant: 'error' });
     }
   }
 

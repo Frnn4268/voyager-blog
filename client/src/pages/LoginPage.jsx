@@ -9,12 +9,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import LoginIcon from '@mui/icons-material/Login';
+import { useSnackbar } from 'notistack';
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   const { setUserInfo } = useContext(UserContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   async function login(ev) {
     ev.preventDefault();
@@ -31,12 +33,12 @@ export default function LoginPage() {
           setRedirect(true);
         });
 
-        alert("Login successful.");
+        enqueueSnackbar("Login successful.", { variant: 'success' });
       } else {
-        alert("Wrong credentials.");
+        enqueueSnackbar("Wrong credentials.", { variant: 'error' });
       }
     } catch (error) {
-      alert("Login failed.");
+      enqueueSnackbar("Login failed.", { variant: 'error' });
     }
   }
 
