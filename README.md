@@ -48,17 +48,17 @@ Create a `.env` file in the root directory and add the following environment var
 
 1. Backend:
    
-`PORT=<your_port>`
+	`PORT=<your_port>`
 
-`MONGODB_URI=<your_mongo_url`
+	`MONGODB_URI=<your_mongo_url`
 
-`JWT_SECRET=<your_secret>`
+	`JWT_SECRET=<your_secret>`
 
 3. Frontend:
    
-`REACT_APP_API_URL=<your_api_url>`
+	`REACT_APP_API_URL=<your_api_url>`
 
-`REACT_APP_API_UPLOAD=<your_api_url>`
+	`REACT_APP_API_UPLOAD=<your_api_url>`
 
 Replace `<your_api_url>` with the URL of your backend API.
 
